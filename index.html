@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8" />
+	<title>audio-test</title>
+	<script src="japanese-number.js"></script>
+	<script>
+	var id = null;
+	var sounds_ids = [];
+	function doNext() {
+		if (id) {
+			let audio = document.getElementById(id);
+			if (audio) {
+				audio.removeEventListener('ended', doNext, false);
+			}
+		}
+		id = sound_ids.shift();
+		if (id) {
+			try {
+				let audio = document.getElementById(id);
+				if (audio) {
+					audio.pause();
+					audio.addEventListener('ended', doNext, false);
+					audio.currentTime = 0;
+					audio.play();
+				}
+			} catch (err) {
+				;
+			}
+		}
+	}
+	function doStartPlay(str) {
+		sound_ids = str.split(',');
+		doNext();
+	}
+	function doStart() {
+		let text1 = document.getElementById('text1').value;
+		let number;
+		
+		try {
+			number = JN_get_number([], text1);
+		} catch (err) {
+			let text2 = document.getElementById('text2');
+			text2.innerHTML = "大きすぎる数です。";
+			let text3 = document.getElementById('text3');
+			text3.innerHTML = "";
+			let text4 = document.getElementById('text4');
+			text4.innerHTML = "";
+			return;
+		}
+
+		let array = [];
+		for (let i = 0; i < number.length; ++i) {
+			array.push(number[i][4]);
+		}
+		let str = array.join(",");
+		doStartPlay(str);
+
+		str = "";
+		for (let i = 0; i < number.length; ++i) {
+			str += number[i][3];
+		}
+		let text2 = document.getElementById('text2');
+		if (text2) {
+			text2.innerHTML = str;
+		}
+
+		str = "";
+		for (let i = 0; i < number.length; ++i) {
+			str += number[i][2];
+		}
+		let text3 = document.getElementById('text3');
+		if (text3) {
+			text3.innerHTML = str;
+		}
+
+		str = "";
+		for (let i = 0; i < number.length; ++i) {
+			str += number[i][1];
+		}
+		let text4 = document.getElementById('text4');
+		if (text4) {
+			text4.innerHTML = str;
+		}
+	}
+	</script>
+</head>
+<body>
+<h1>audio-test2</h1>
+<div id="sounds">
+	<audio>
+		<p>* Your browser doesn't support HTML5 audio.</p>
+	</audio>
+	<audio id="00-zero" preload="auto"><source src="sounds/00-zero.wav" type="audio/wav" /></audio>
+	<audio id="01-ichi" preload="auto"><source src="sounds/01-ichi.wav" type="audio/wav" /></audio>
+	<audio id="02-ni" preload="auto"><source src="sounds/02-ni.wav" type="audio/wav" /></audio>
+	<audio id="03-san" preload="auto"><source src="sounds/03-san.wav" type="audio/wav" /></audio>
+	<audio id="04-yon" preload="auto"><source src="sounds/04-yon.wav" type="audio/wav" /></audio>
+	<audio id="05-go" preload="auto"><source src="sounds/05-go.wav" type="audio/wav" /></audio>
+	<audio id="06-roku" preload="auto"><source src="sounds/06-roku.wav" type="audio/wav" /></audio>
+	<audio id="07-nana" preload="auto"><source src="sounds/07-nana.wav" type="audio/wav" /></audio>
+	<audio id="08-hachi" preload="auto"><source src="sounds/08-hachi.wav" type="audio/wav" /></audio>
+	<audio id="09-kyuu" preload="auto"><source src="sounds/09-kyuu.wav" type="audio/wav" /></audio>
+	<audio id="10_12-chou" preload="auto"><source src="sounds/10_12-chou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_1-icchou" preload="auto"><source src="sounds/10_12_1-icchou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_2-nichou" preload="auto"><source src="sounds/10_12_2-nichou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_3-sanchou" preload="auto"><source src="sounds/10_12_3-sanchou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_4-yonchou" preload="auto"><source src="sounds/10_12_4-yonchou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_5-gochou" preload="auto"><source src="sounds/10_12_5-gochou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_6-rokuchou" preload="auto"><source src="sounds/10_12_6-rokuchou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_7-nanachou" preload="auto"><source src="sounds/10_12_7-nanachou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_8-hacchou" preload="auto"><source src="sounds/10_12_8-hacchou.wav" type="audio/wav" /></audio>
+	<audio id="10_12_9-kyuuchou" preload="auto"><source src="sounds/10_12_9-kyuuchou.wav" type="audio/wav" /></audio>
+	<audio id="10_12-chou" preload="auto"><source src="sounds/10_12-chou.wav" type="audio/wav" /></audio>
+	<audio id="10-juu" preload="auto"><source src="sounds/10-juu.wav" type="audio/wav" /></audio>
+	<audio id="11-juuichi" preload="auto"><source src="sounds/11-juuichi.wav" type="audio/wav" /></audio>
+	<audio id="12-juuni" preload="auto"><source src="sounds/12-juuni.wav" type="audio/wav" /></audio>
+	<audio id="13-juusan" preload="auto"><source src="sounds/13-juusan.wav" type="audio/wav" /></audio>
+	<audio id="14-juuyon" preload="auto"><source src="sounds/14-juuyon.wav" type="audio/wav" /></audio>
+	<audio id="15-juugo" preload="auto"><source src="sounds/15-juugo.wav" type="audio/wav" /></audio>
+	<audio id="16-juuroku" preload="auto"><source src="sounds/16-juuroku.wav" type="audio/wav" /></audio>
+	<audio id="17-juunana" preload="auto"><source src="sounds/17-juunana.wav" type="audio/wav" /></audio>
+	<audio id="18-juuhachi" preload="auto"><source src="sounds/18-juuhachi.wav" type="audio/wav" /></audio>
+	<audio id="19-juukyuu" preload="auto"><source src="sounds/19-juukyuu.wav" type="audio/wav" /></audio>
+	<audio id="20-nijuu" preload="auto"><source src="sounds/20-nijuu.wav" type="audio/wav" /></audio>
+	<audio id="30-sanjuu" preload="auto"><source src="sounds/30-sanjuu.wav" type="audio/wav" /></audio>
+	<audio id="40-yonjuu" preload="auto"><source src="sounds/40-yonjuu.wav" type="audio/wav" /></audio>
+	<audio id="50-gojuu" preload="auto"><source src="sounds/50-gojuu.wav" type="audio/wav" /></audio>
+	<audio id="60-rokujuu" preload="auto"><source src="sounds/60-rokujuu.wav" type="audio/wav" /></audio>
+	<audio id="70-nanajuu" preload="auto"><source src="sounds/70-nanajuu.wav" type="audio/wav" /></audio>
+	<audio id="80-hachijuu" preload="auto"><source src="sounds/80-hachijuu.wav" type="audio/wav" /></audio>
+	<audio id="90-kyuujuu" preload="auto"><source src="sounds/90-kyuujuu.wav" type="audio/wav" /></audio>
+	<audio id="100-hyaku" preload="auto"><source src="sounds/100-hyaku.wav" type="audio/wav" /></audio>
+	<audio id="200-nihyaku" preload="auto"><source src="sounds/200-nihyaku.wav" type="audio/wav" /></audio>
+	<audio id="300-sanbyaku" preload="auto"><source src="sounds/300-sanbyaku.wav" type="audio/wav" /></audio>
+	<audio id="400-yonhyaku" preload="auto"><source src="sounds/400-yonhyaku.wav" type="audio/wav" /></audio>
+	<audio id="500-gohyaku" preload="auto"><source src="sounds/500-gohyaku.wav" type="audio/wav" /></audio>
+	<audio id="600-roppyaku" preload="auto"><source src="sounds/600-roppyaku.wav" type="audio/wav" /></audio>
+	<audio id="700-nanahyaku" preload="auto"><source src="sounds/700-nanahyaku.wav" type="audio/wav" /></audio>
+	<audio id="800-happyaku" preload="auto"><source src="sounds/800-happyaku.wav" type="audio/wav" /></audio>
+	<audio id="900-kyuuhyaku" preload="auto"><source src="sounds/900-kyuuhyaku.wav" type="audio/wav" /></audio>
+	<audio id="1000-issen" preload="auto"><source src="sounds/1000-issen.wav" type="audio/wav" /></audio>
+	<audio id="1000-sen" preload="auto"><source src="sounds/1000-sen.wav" type="audio/wav" /></audio>
+	<audio id="2000-nisen" preload="auto"><source src="sounds/2000-nisen.wav" type="audio/wav" /></audio>
+	<audio id="3000-sanzen" preload="auto"><source src="sounds/3000-sanzen.wav" type="audio/wav" /></audio>
+	<audio id="4000-yonsen" preload="auto"><source src="sounds/4000-yonsen.wav" type="audio/wav" /></audio>
+	<audio id="5000-gosen" preload="auto"><source src="sounds/5000-gosen.wav" type="audio/wav" /></audio>
+	<audio id="6000-rokusen" preload="auto"><source src="sounds/6000-rokusen.wav" type="audio/wav" /></audio>
+	<audio id="7000-nanasen" preload="auto"><source src="sounds/7000-nanasen.wav" type="audio/wav" /></audio>
+	<audio id="8000-hassen" preload="auto"><source src="sounds/8000-hassen.wav" type="audio/wav" /></audio>
+	<audio id="9000-kyuusen" preload="auto"><source src="sounds/9000-kyuusen.wav" type="audio/wav" /></audio>
+	<audio id="10000-ichiman" preload="auto"><source src="sounds/10000-ichiman.wav" type="audio/wav" /></audio>
+	<audio id="10000-man" preload="auto"><source src="sounds/10000-man.wav" type="audio/wav" /></audio>
+	<audio id="20000-niman" preload="auto"><source src="sounds/20000-niman.wav" type="audio/wav" /></audio>
+	<audio id="30000-sanman" preload="auto"><source src="sounds/30000-sanman.wav" type="audio/wav" /></audio>
+	<audio id="40000-yonman" preload="auto"><source src="sounds/40000-yonman.wav" type="audio/wav" /></audio>
+	<audio id="50000-goman" preload="auto"><source src="sounds/50000-goman.wav" type="audio/wav" /></audio>
+	<audio id="60000-rokuman" preload="auto"><source src="sounds/60000-rokuman.wav" type="audio/wav" /></audio>
+	<audio id="70000-nanaman" preload="auto"><source src="sounds/70000-nanaman.wav" type="audio/wav" /></audio>
+	<audio id="80000-hachiman" preload="auto"><source src="sounds/80000-hachiman.wav" type="audio/wav" /></audio>
+	<audio id="90000-kyuuman" preload="auto"><source src="sounds/90000-kyuuman.wav" type="audio/wav" /></audio>
+	<audio id="100000000-ichioku" preload="auto"><source src="sounds/100000000-ichioku.wav" type="audio/wav" /></audio>
+	<audio id="100000000-oku" preload="auto"><source src="sounds/100000000-oku.wav" type="audio/wav" /></audio>
+	<audio id="200000000-nioku" preload="auto"><source src="sounds/200000000-nioku.wav" type="audio/wav" /></audio>
+	<audio id="300000000-sanoku" preload="auto"><source src="sounds/300000000-sanoku.wav" type="audio/wav" /></audio>
+	<audio id="400000000-yonnoku" preload="auto"><source src="sounds/400000000-yonnoku.wav" type="audio/wav" /></audio>
+	<audio id="500000000-gooku" preload="auto"><source src="sounds/500000000-gooku.wav" type="audio/wav" /></audio>
+	<audio id="600000000-rokuoku" preload="auto"><source src="sounds/600000000-rokuoku.wav" type="audio/wav" /></audio>
+	<audio id="700000000-nanaoku" preload="auto"><source src="sounds/700000000-nanaoku.wav" type="audio/wav" /></audio>
+	<audio id="800000000-hachioku" preload="auto"><source src="sounds/800000000-hachioku.wav" type="audio/wav" /></audio>
+	<audio id="900000000-kyuuoku" preload="auto"><source src="sounds/900000000-kyuuoku.wav" type="audio/wav" /></audio>
+	<audio id="minus.wav" preload="auto"><source src="sounds/minus.wav" type="audio/wav" /></audio>
+</div>
+<p>
+	<form onsubmit="doStart(); return false;">
+		<input type="text" name="text1" id="text1" />
+		<input type="submit" value="Start" />
+	</form>
+</p>
+<p>
+	<span id="text2"></span>
+</p>
+<p>
+	<span id="text3"></span>
+</p>
+<p>
+	<span id="text4"></span>
+</p>
+</body></html>
